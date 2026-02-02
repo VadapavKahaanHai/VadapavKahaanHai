@@ -1,40 +1,43 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import Pagination from "@components/Pagination.astro";
 import Card from "@components/Card";
 import { SITE } from "@config";
 
-export interface Props {
-  currentPage: number;
-  totalPages: number;
-  paginatedPosts: CollectionEntry<"blog">[];
-}
+// Import from the correct path
+import projectsData from "../content/data/projects.json";
 
-const { currentPage, totalPages, paginatedPosts } = Astro.props;
+// Get the actual array
+const projects = Array.isArray(projectsData) ? projectsData : (projectsData.default || []);
+
+// Reverse the array so last project in JSON appears first
+const sortedProjects = [...projects].reverse();
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
+<Layout title={`Projects | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Main pageTitle="Projects" pageDesc="All Stupid Stuff I made.">
     <ul>
       {
-        paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
-        ))
+        sortedProjects && sortedProjects.length > 0 ? (
+          sortedProjects.map((project) => (
+            <Card 
+              href={project.link} 
+              frontmatter={{
+                title: project.title,
+                description: project.description,
+                technologies: project.technologies
+              }} 
+            />
+          ))
+        ) : (
+          <p>No projects found. Check console for logs.</p>
+        )
       }
     </ul>
   </Main>
 
-  <Pagination
-    {currentPage}
-    {totalPages}
-    prevUrl={`/posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`/posts/${currentPage + 1}/`}
-  />
-
-  <Footer noMarginTop={totalPages > 1} />
+  <Footer noMarginTop={false} />
 </Layout>

@@ -10,11 +10,24 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { SOCIALS } from "@config";
 
-const posts = await getCollection("blog");
+// Import projects from JSON
+let projectsData;
+try {
+  projectsData = await import("../content/data/projects.json");
+} catch (e) {
+  console.error("Failed to load projects.json:", e);
+  projectsData = { default: [] };
+}
 
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+// Get the actual array
+const projects = Array.isArray(projectsData.default) ? projectsData.default : [];
+
+// Reverse to show latest first
+const sortedProjects = [...projects].reverse();
+
+// Split into featured and non-featured
+const featuredProjects = sortedProjects.filter(project => project.featured === true);
+const recentProjects = sortedProjects.filter(project => project.featured !== true);
 
 const socialCount = SOCIALS.filter((social) => social.active).length;
 ---
@@ -23,14 +36,15 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Hello there! 👋</h1>
+      <h1 id="greeting" class="typewriter"></h1>
 
       <p>
         <br />
-        I am Himanshu, but I go by spooky in online circles.
+        Sanket here, but the internet knows me as Vadapav
         <br />
-        I am a tech nerd, but I also happen to work as a DevOps Engineer to support
-        the nerd inside me.
+        <br />
+
+        I build data pipelines, automate boring stuff, and will fight anyone who says The Office isn't peak television. Previously worked as a Business Analyst at Hapag-Lloyd building automation tools, now finishing my MS at Uni Bielefeld while curating Spotify playlists nobody asked for.
       </p>
 
       {
@@ -46,60 +60,79 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
 
     <Hr />
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
+    {featuredProjects.length > 0 && (
+      <>
+        <section id="featured">
+          <h2>Featured Projects</h2>
           <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                ),
-            )}
+            {featuredProjects.map(project => (
+              <Card
+                href={project.link}
+                frontmatter={{
+                  title: project.title,
+                  description: project.description,
+                  technologies: project.technologies
+                }}
+                secHeading={false}
+              />
+            ))}
           </ul>
         </section>
-      )
-    }
+        {recentProjects.length > 0 && <Hr />}
+      </>
+    )}
+ {recentProjects.length > 0 && (
+      <section id="recent-posts">
+        <h2>Recent Projects</h2>
+        <ul>
+          {recentProjects.map((project, index) => (
+            index < 4 && (
+              <Card
+                href={project.link}
+                frontmatter={{
+                  title: project.title,
+                  description: project.description,
+                  technologies: project.technologies
+                }}
+                secHeading={false}
+              />
+            )
+          ))}
+        </ul>
+      </section>
+    )}
 
     <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
+      <LinkButton href="/Projects/">
+        All Projects
         <svg xmlns="http://www.w3.org/2000/svg"
           ><path
             d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
           ></path>
         </svg>
       </LinkButton>
-    </div>
+    </div> 
   </main>
 
   <Footer />
 </Layout>
+
+<script>
+  import { initTypewriter } from "../utils/typewriter";
+  
+  const greetings = [
+    "Hello 👋",
+    "नमस्कार 🙏",
+    "Hei 👋",          
+    "こんにちは 👋",     
+    "Hola 👋",         
+    "你好 👋",          
+    "Hei 👋",           
+    "Hej 👋"
+    ];
+  
+  initTypewriter("greeting", greetings);
+</script>
 
 <style>
   /* ===== Hero Section ===== */
@@ -108,6 +141,23 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
   }
   #hero h1 {
     @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+    min-height: 3.5rem;
+  }
+   @media (min-width: 640px) {
+    #hero h1 {
+      min-height: 3.5rem; /* Larger min-height for larger screens */
+    }
+  }
+
+  .typewriter {
+    border-right: 2px solid currentColor;
+    padding-right: 5px;
+    animation: blink 0.7s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { border-color: currentColor; }
+    51%, 100% { border-color: transparent; }
   }
   #hero .rss-link {
     @apply mb-6;

@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Meow Cat Fact Pipeline",
+        "slug": "another-cool-project",
+        "link": "https://github.com/VadapavKahaanHai/meow_fact_pipeline",
+        "description": "An ETL pipeline built with Apache Airflow that extracts cat facts from an API, transforms the data, and loads it into PostgreSQL. This project demonstrates core data engineering concepts including workflow orchestration, API integration, and database operations.",
+        "technologies": ["Python", "Docker", "Apache Airflow", "PostgreSQL"],
+        "featured": true
+    },
+    {
+        "title": "MagicBricks Scraper",
+        "slug": "my-awesome-project",
+        "link": "https://github.com/VadapavKahaanHai/MB-Scraper",
+        "description": "A production-ready web scraper for extracting comprehensive property data from MagicBricks.com, India's leading real estate marketplace. The scraper collects detailed property information and stores it in a PostgreSQL database for analysis.",
+        "technologies": ["Python", "BeautifulSoup", "PostgreSQL", "Claude Code", "Selenium Base"],
+        "featured": true
+    }
+]

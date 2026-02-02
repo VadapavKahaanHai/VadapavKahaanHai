@@ -1,11 +1,11 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://me.spookyintheam.com/", // replace this with your deployed domain
-  author: "Himanshu",
-  desc: "Himanshu's blog, a small insight into my mind",
-  title: "Himanshu",
-  ogImage: "og-media.jpg",
+  website: "https://vadapav.tech/", // replace this with your deployed domain
+  author: "Sanket",
+  desc: "Vadapav's Portfolio, my small corner on internet",
+  title: "Sanket",
+  ogImage: "literally-me.jpg",
   lightAndDarkMode: true,
   postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
@@ -26,25 +26,32 @@ export const LOGO_IMAGE = {
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/spookyintheam",
+    href: "https://github.com/VadapavKahaanHai",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/himanshu-gaikwad/",
+    href: "https://www.linkedin.com/in/sanketakavadapav/",
     linkTitle: `${SITE.title} on LinkedIn`,
     active: true,
   },
-  {
-    name: "Twitter",
-    href: "https://twitter.com/spookyintheam",
-    linkTitle: `${SITE.title} on Twitter`,
-    active: true,
-  },
+  // {
+  //   name: "Twitter",
+  //   href: "https://twitter.com/spookyintheam",
+  //   linkTitle: `${SITE.title} on Twitter`,
+  //   active: true,
+  // },
   {
     name: "Discord",
-    href: "https://discord.com/users/680274737561206789",
+    href: "https://discord.com/users/1075442569128980591",
+    linkTitle: `${SITE.title} on Discord`,
+    active: true,
+  },
+
+  {
+    name: "Spotify",
+    href: "https://open.spotify.com/user/31xzfhs6qrsfwxwh6eogmqbosjvq?si=9VXGYvIkT1OjvJ5AqwteCw",
     linkTitle: `${SITE.title} on Discord`,
     active: true,
   },

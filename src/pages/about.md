@@ -3,8 +3,8 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-Hello, I am Himanshu, or spooky if you know me from online circles!
+Namaskar, Sanket here, but the Internet knows me as Vadapav
 
-I hope to turn this small part of the internet into a glimpse of my mind 😃
+Hoping to make this my little corner of the Internet worth visiting  🌱
 
-**Go to my resume page if you're here to checkout my professional work!**
+**My resume page has all the professional bits if that's what you're after**

@@ -160,10 +160,17 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		
+		"data": {
+"projects": {
+	id: "projects";
+  collection: "data";
+  data: any
+};
+};
+
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../../src/content/config.js");
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }
