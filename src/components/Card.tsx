@@ -11,7 +11,7 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter, secHeading = true }: Props) {
-  const { title, pubDatetime, modDatetime, description, technologies } =
+  const { title,description, technologies } =
     frontmatter;
 
   const headerProps = {

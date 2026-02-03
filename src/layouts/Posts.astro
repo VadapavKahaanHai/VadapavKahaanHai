@@ -10,7 +10,7 @@ import { SITE } from "@config";
 import projectsData from "../content/data/projects.json";
 
 // Get the actual array
-const projects = Array.isArray(projectsData) ? projectsData : (projectsData.default || []);
+const projects = Array.isArray(projectsData) ? projectsData : [];
 
 // Reverse the array so last project in JSON appears first
 const sortedProjects = [...projects].reverse();
