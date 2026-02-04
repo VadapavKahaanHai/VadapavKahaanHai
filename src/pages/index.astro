@@ -131,7 +131,15 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
     "Hej 👋"
     ];
   
-  initTypewriter("greeting", greetings);
+  function startTypewriter() {
+    initTypewriter("greeting", greetings);
+  }
+  
+  // Initialize on page load
+  startTypewriter();
+  
+  // Reinitialize on view transition
+  document.addEventListener("astro:after-swap", startTypewriter);
 </script>
 
 <style>
@@ -141,16 +149,23 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
   }
   #hero h1 {
     @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
-    min-height: 3.5rem;
+    height: 3.5rem;
+    min-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1;
+    display: flex;
+    align-items: center;
   }
    @media (min-width: 640px) {
     #hero h1 {
-      min-height: 3.5rem; /* Larger min-height for larger screens */
+      height: 3.5rem;
+      min-width: 400px;
     }
   }
 
   .typewriter {
-    border-right: 2px solid currentColor;
+   
     padding-right: 5px;
     animation: blink 0.7s infinite;
   }

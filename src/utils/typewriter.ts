@@ -1,15 +1,20 @@
 export function initTypewriter(elementId: string, greetings: string[]) {
+  const greetingElement = document.getElementById(elementId);
+  
+  if (!greetingElement) return;
+  
+  // Clear any existing content and timeouts
+  greetingElement.textContent = '';
+  
   let currentGreetingIndex = 0;
   let currentCharIndex = 0;
   let isDeleting = false;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  
   const typingSpeed = 150;
   const deletingSpeed = 100;
   const pauseTime = 2000;
   const initialDelay = 500; // Wait before starting
-  
-  const greetingElement = document.getElementById(elementId);
-  
-  if (!greetingElement) return;
   
   // Preload all greetings (forces emoji rendering)
   const hiddenPreload = document.createElement('div');
@@ -36,7 +41,7 @@ export function initTypewriter(elementId: string, greetings: string[]) {
     }
     
     if (!isDeleting && currentCharIndex === chars.length) {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         isDeleting = true;
         type();
       }, pauseTime);
@@ -49,11 +54,11 @@ export function initTypewriter(elementId: string, greetings: string[]) {
     }
     
     const speed = isDeleting ? deletingSpeed : typingSpeed;
-    setTimeout(type, speed);
+    timeoutId = setTimeout(type, speed);
   }
   
   // Start after a small delay to ensure fonts/emojis are loaded
-  setTimeout(() => {
+  timeoutId = setTimeout(() => {
     type();
   }, initialDelay);
 }
