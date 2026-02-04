@@ -5,19 +5,25 @@ import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
 
 const fetchFonts = async () => {
-  // Regular Font
-  const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf",
-  );
-  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
+  try {
+    // Regular Font
+    const fontFileRegular = await fetch(
+      "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf",
+    );
+    const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
-  // Bold Font
-  const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf",
-  );
-  const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
+    // Bold Font
+    const fontFileBold = await fetch(
+      "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf",
+    );
+    const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
 
-  return { fontRegular, fontBold };
+    return { fontRegular, fontBold };
+  } catch (error) {
+    console.error("Failed to fetch fonts:", error);
+    // Return empty buffers as fallback
+    return { fontRegular: new ArrayBuffer(0), fontBold: new ArrayBuffer(0) };
+  }
 };
 
 const { fontRegular, fontBold } = await fetchFonts();
