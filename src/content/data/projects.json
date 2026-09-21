@@ -24,19 +24,16 @@
         "featured": true
     },
     {
-        "title": "Growing Up Narratives",
+        "title": "Pit Theory",
         "slug": "growing-up-narratives",
-        "link": "https://github.com/YOUR_USERNAME/growing-up-narratives",
-        "description": "An end-to-end data engineering and NLP pipeline that collects public essays from RSS feeds, validates and stores article data in PostgreSQL, enriches records with sentiment, themes, keywords, topics, and life-stage signals, and surfaces insights through a Streamlit analytics dashboard.",
+        "link": "https://github.com/VadapavKahaanHai/pit-theory",
+        "description": "Built a session-based Formula 1 analytics platform using FastF1, DuckDB, Parquet, Dash, and Plotly to transform race-session data into reusable datasets and interactive analysis of pace, tyre degradation, race gaps, position changes, and pit-stop strategy.",
         "technologies": [
             "Python",
-            "PostgreSQL",
-            "Apache Airflow",
-            "Docker",
-            "Streamlit",
-            "spaCy",
-            "scikit-learn",
-            "NLTK"
+            "DuckDB",
+            "Parquet",
+            "Plotly",
+            "Dash"
         ],
         "featured": true
     }
